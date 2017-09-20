@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM小案例</title>
+    <script>
+        window.onload = function any_function_name(){
+           let s= document.getElementsByTagName('dt');
+           let result='all drinks';
+           for(let i=0;i<s.length;i++){
+               result=result+s[i].innerHTML+',';
+           }
+           alert(result);
+            //数据更新
+            let r=document.getElementById('nihao');
+            r.innerHTML='update hot-milk';
+            //数据添加
+            let add=document.getElementById('add');
+           juice=document.createElement('dd');
+           juice.id='addjuice';
+           juice.innerText='juice';
+           add.appendChild(juice);
+           //添加css样式
+            let dd = document.getElementsByTagName('dd');
+            style = document.createElement('style');
+            style.setAttribute('type', 'text/css');
+            style.innerHTML = 'dd{color:red}';
+            document.getElementsByTagName('head')[0].appendChild(style);
+           //删除
+            let self=document.getElementById('selete');
+            let parent=self.parentElement;
+            let removed=parent.removeChild(self);
+            removed===self;
+        };
+
+    </script>
+</head>
+<dl id="drink">
+    <dt id="selete">moka</dt>
+    <dd>re-moka</dd>
+    <dt >milk</dt>
+    <dd id="nihao">re-milk</dd>
+    <dd>leng-milk</dd>
+    <dt id="add">guozhi</dt>
+    <dd>xianzha-guozhi</dd>
+</dl>
+</html>
