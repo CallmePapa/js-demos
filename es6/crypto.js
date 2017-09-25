@@ -35,20 +35,20 @@ console.log('Encrypted text:' + encrypted);
 console.log('Decrypted text:' + decrypted);
 
 //DH密钥交换协议
-var wei=crypto.createDiffieHellman(512);
-var wei_key=wei.generateKeys();
+var wei = crypto.createDiffieHellman(512);
+var wei_key = wei.generateKeys();
 
-var prime=wei.getPrime();
-var generator=wei.getGenerator();
+var prime = wei.getPrime();
+var generator = wei.getGenerator();
 
-console.log('Prime:'+prime.toString('hex'));
-console.log('Generator:'+generator.toString('hex'));
+console.log('Prime:' + prime.toString('hex'));
+console.log('Generator:' + generator.toString('hex'));
 
-var zhao=crypto.createDiffieHellman(prime, generator);
-var zhao_key=zhao.generateKeys();
+var zhao = crypto.createDiffieHellman(prime, generator);
+var zhao_key = zhao.generateKeys();
 
-var wei_serect=wei.computeSecret(zhao_key);
-var zhao_serect=zhao.computeSecret(wei_key);
+var wei_serect = wei.computeSecret(zhao_key);
+var zhao_serect = zhao.computeSecret(wei_key);
 
-console.log('secrect of wei'+wei_serect.toString('hex'));
-console.log('secrect of zhao'+zhao_serect.toString('hex'));
+console.log('secrect of wei' + wei_serect.toString('hex'));
+console.log('secrect of zhao' + zhao_serect.toString('hex'));
