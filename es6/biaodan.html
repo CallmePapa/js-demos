@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>表单的操作</title>
+    <script>
+        /*  function checkForm() {
+         let form =document.getElementById('test-form');
+         let input_pwd=document.getElementById('password');
+         let md5_pwd=document.getElementById('md5-password');
+         md5_pwd.value=toMD5(input_pwd.value)
+         return true;
+         }*/
+        window.onload = function any_function_name() {
+            function checkForm() {
+                let username = document.getElementById('username');
+                let firstPassword = document.getElementById('first-password');
+                let secondPassword = document.getElementById('second-password');
+                let regUsername = /^[\d\w]{3,10}$/;
+                let regPasswd = /^[\d\w]{6,20}$/;
+                if (!regUsername.test(username.value)) {
+                    alert('用户名必须是3-10位英文字母或数字');
+
+                }
+                if (!regPasswd.test(firstPassword.value)) {
+                    alert('密码必须为6到20位！');
+                    return false;
+                }
+                if (firstPassword.value !== secondPassword.value) {
+                    alert('两次输入密码必须一致！');
+                    return false;
+                }
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
-$END$
+<form action="" id="test-form" onsubmit="return checkForm">
+    <p>
+        <input type="text" id='username' name="test">
+    </p>
+    <!-- <input type="password" id="password">
+     <input type="hidden" id="md5-password" name="password">-->
+    <p>
+        <input type="password" id="first-password" name="password">
+    </p>
+    <p>
+        <input type="password" id="second-password" name="password">
+    </p>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+</form>
 </body>
 </html>

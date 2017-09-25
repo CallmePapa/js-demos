@@ -4,26 +4,29 @@
     <meta charset="UTF-8">
     <title>Canvas</title>
     <script type="application/javascript">
-        let canvas = document.getElementById('test-canvas');
-        if (canvas.getContext) {//用来判断是否支持canvas
-            alert('你的浏览器支持Canvas');
-        } else {
-            alert('你的浏览器不支持Canvas');
+        window.onload = function any_function_name() {
+            let canvas = document.getElementById('test-canvas');
+            if (canvas.getContext) {
+                alert('你的浏览器支持Canvas!');
+            } else {
+                alert('你的浏览器不支持Canvas!');
+            }
+            let ctx = Canvas.getContext('2d');
+            ctx.clearRect(0, 0, 200, 200);//擦除（0,0）位置大小的矩形
+            ctx.fillStyle = "#555555";
+            ctx.fillRect(10, 10, 130, 130);
+            //利用path绘制复杂路径。
+            let path = new Path2D();
+            path.arc(75, 75, 50, 0, Math.PI * 2, true);
+            path.moveTo(110, 75);
+            path.arc(75, 75, 35, 0, Math.PI, false);
+            path.moveTo(65, 65);
+            path.arc(60, 65, 5, 0, Math.PI * 2, true);
+            path.moveTo(95, 65);
+            path.arc(90, 65, 5, 0, Math.PI * 2, true);
+            ctx.strokeStyle = '#0000ff';
+            ctx.stroke(path);
         }
-        let ctx = Canvas.getContext('2d');
-        ctx.clearRect(0, 0, 200, 200);//擦除（0,0）位置大小的矩形
-        ctx.fillStyle = "#555555";
-        ctx.fillRect(10, 10, 130, 130);
-        let path = new Path2D();
-        path.arc(75, 75, 50, 0, Math.PI * 2, true);
-        path.moveTo(110, 75);
-        path.arc(75, 75, 35, 0, Math.PI, false);
-        path.moveTo(65, 65);
-        path.arc(60, 65, 5, 0, Math.PI * 2, true);
-        path.moveTo(95, 65);
-        path.arc(90, 65, 5, 0, Math.PI * 2, true);
-        ctx.strokeStyle = '#0000ff';
-        ctx.stroke(path);
     </script>
 </head>
 <body>
