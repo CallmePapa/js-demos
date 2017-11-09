@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="../es6/jquery-2.1.4/jquery.min.js"></script>
+    <script src="jquery-2.1.4/jquery.min.js"></script>
     <title>jquery</title>
     <script>
-     let r,n,s;
-     try{
-         s=prompt('please input number');
-         n=parseInt(s);
-         if(isNaN(n)){
-             throw  new Error('输入有误');
-         }
-         r=n*n;
-         alert(n+'*'+n+'='+r);
-     }catch(e){
-         alert('出错了：'+e);
-     }
+        let r, n, s;
+        try {
+            s = prompt('please input number');
+            n = parseInt(s);
+            if (isNaN(n)) {
+                throw  new Error('输入有误');
+            }
+            r = n * n;
+            alert(n + '*' + n + '=' + r);
+        } catch (e) {
+            alert('出错了：' + e);
+        }
     </script>
 </head>
 <body>
