@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .slideBox {
+            /*设置盒子的宽高，根据图片设置*/
+            width: 800px;
+            height: 450px;
+            border: 1px solid red;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        /*轮播图图片样式*/
+        .slideBox li {
+            list-style: none;
+        }
+
+        .slideBox li img {
+            vertical-align: middle;
+        }
+
+        .slideBox .bd {
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideBox .bd ul {
+            position: absolute;
+            top: 0;
+        }
+
+        .slideBox .bd li {
+            float: left;
+        }
+
+        .slideBox .btn {
+            width: 38px;
+            height: 54px;
+            display: block;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slideBox .prev {
+            background: url("images/one.jpg") no-repeat;
+            left: -50px;
+            background-size: 100%, 100%;
+        }
+
+        .slideBox .next {
+            background: url("images/six.jpg") no-repeat;
+            right: -50px;
+            background-size: 100%, 100%;
+        }
+
+        /*下方按钮样式*/
+        .slideBox .hd {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slideBox .hd li {
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin-right: 10px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            background: url("images/one.jpg") -10px 0 no-repeat;
+        }
+
+        .slideBox .hd li:nth-child(2) {
+            background-image: url(o2bb2.png.editor.png);
+        }
+
+        .slideBox .hd li:nth-child(3) {
+            background-image: url(http://cdn.attach.qdfuns.com/notes/pics/201711/04/143409ja3wsz3pep33xp0k.png.editor.png);
+        }
+
+        .slideBox .hd li:nth-child(4) {
+            background-image: url(http://cdn.attach.qdfuns.com/notes/pics/201711/04/143409wg533fgfbv3223cf.png.editor.png);
+        }
+
+        .slideBox .hd li:nth-child(5) {
+            background-image: url(http://cdn.attach.qdfuns.com/notes/pics/201711/04/143409rc4jz6rgl9e0rv0v.png.editor.png);
+        }
+
+        .slideBox .hd li:nth-child(6) {
+            background-image: url(http://cdn.attach.qdfuns.com/notes/pics/201711/04/143409op9qk6mm66wmwkf9.png.editor.png);
+        }
+
+        .slideBox .hd li.current {
+            background-position: -10px -75px !important;
+        }
+    </style>
+</head>
+<body>
+<div class="slideBox">
+    <div class="bd">
+        <ul>
+            <li><a href="javascript:;"><img
+                    src="images/one.jpg" width="800"/></a>
+            </li>
+            <li><a href="javascript:;"><img
+                    src="images/two.jpg" width="800"/></a>
+            </li>
+            <li><a href="javascript:;"><img
+                    src="images/three.jpg" width="800"/></a>
+            </li>
+            <li><a href="javascript:;"><img
+                    src="images/four.jpg" width="800"/></a>
+            </li>
+            <li><a href="javascript:;"><img
+                    src="images/one.jpg" width="800"/></a>
+            </li>
+            <li><a href="javascript:;"><img
+                    src="images/two.jpg" width="800"/></a>
+            </li>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul>
+            <li class="current"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <a class="btn prev" href="javascript:void(0)"></a>
+    <a class="btn next" href="javascript:void(0)"></a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    //只用在该内容更改类及速度
+    $(function () {
+        $.slide({
+            slideBox: '.slideBox',   //外框盒子类名
+            bdUl: '.slideBox .bd ul',   //图片轮播盒子
+            hdUl: '.slideBox .hd ul',   //按钮盒子
+            bdLi: '.slideBox .bd li',   //单个图片
+            hdLi: '.slideBox .hd li',   //单个盒子
+            btnPrev: '.prev',      //左按钮
+            btnNext: '.next',      //右按钮
+            speed: 2000,   //一张图片到下一张图片的时间
+            time: 900      //一张图片运动的时间
+        });
+    });
+
+
+    ;(function ($) {
+        $.slide = function (option) {
+            var defaults = {
+                slideBox: '.slideBox',
+                bdUl: '.slideBox .bd ul',
+                hdUl: '.slideBox .hd ul',
+                bdLi: '.slideBox .bd li',
+                hdLi: '.slideBox .hd li',
+                btnPrev: '.prev',
+                btnNext: '.next',
+                speed: 2000,   //一张图片轮播的时间
+                time: 900      //运动一张图片的时间
+            };
+            $.extend(defaults, option);
+            var bdLiWidth = $(defaults.bdLi).length * $(defaults.bdLi).width();
+            $(defaults.bdUl).width(bdLiWidth);      //设置bdUl的宽度
+
+//        鼠标移入动画停止，移出自动进行动画
+            var timer = setInterval(anim, defaults.speed);
+            $(defaults.slideBox).hover(function () {
+                clearInterval(timer);
+            }, function () {
+                timer = setInterval(anim, defaults.speed);
+            });
+
+            var index = 0;  //轮播图图片索引
+//        右边按钮事件
+            $(defaults.btnNext).on('click', function () {
+                anim();
+            });
+            //        左边按钮事件
+            $(defaults.btnPrev).on('click', function () {
+                $(defaults.hdLi).eq(index).addClass('current').siblings().removeClass('current');  //下方按钮
+                $(defaults.bdUl).stop().animate({left: -index * $(defaults.bdLi).eq(0).width()}, defaults.time);
+                if (index == 0) {
+                    index = $(defaults.bdLi).length - 1;
+                } else {
+                    index--;
+                }
+            });
+            //下方按钮点击事件
+            $(defaults.hdLi).on('click', function () {
+                index = $(this).index();   //同步图片索引与下方按钮索引
+                $(this).addClass('current').siblings().removeClass('current');
+                $(defaults.bdUl).stop().animate({left: -index * $(defaults.bdLi).eq(0).width()}, defaults.time);
+            });
+//        编写动画函数
+            function anim() {
+                $(defaults.hdLi).eq(index).addClass('current').siblings().removeClass('current');//下方按钮
+                $(defaults.bdUl).stop().animate({left: -index * $(defaults.bdLi).eq(0).width()}, defaults.time);
+                if (index < $(defaults.bdLi).length - 1) {
+                    index++;
+                } else {
+                    index = 0;
+                }
+            }
+        };
+    })(jQuery);
+</script>
+</body>
+</html>
