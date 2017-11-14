@@ -3,8 +3,8 @@
  */
 'use strict';
 class Logger {
-    constructor(type = "Info") {
-        this.type = type;
+    constructor() {
+        this.type = "Info";
     }
 
     //static methods
@@ -58,7 +58,7 @@ class ConfigurableLogger extends Logger {
     }
 
     log(message, type) {
-        thix.type = type;
+        this.type = type;
         super.log(message);
     }
 }
@@ -67,5 +67,7 @@ const cLogger = ConfigurableLogger.create('Debug');
 cLogger.log('Configurable Logger', "Info");
 console.log(cLogger.current);
 
+
+//instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
 console.log(cLogger instanceof ConfigurableLogger);//true
 console.log(cLogger instanceof Logger);//false
