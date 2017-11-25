@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,43 +5,47 @@
     <script src="jquery-2.1.4/jquery.min.js"></script>
     <title>jquery</title>
     <script>
-        let json=null;
-        json={};
-        let info=$("#test-form p input").slice(0,3);
-        let sex=$('#test-form p ').find('[name=sex]').first;
-        let city=$('select option');
-        info.map(function () {
-            json[this.name]=this.value
-        });
-        json.sex = sex.get(0).checked?'man':'women';
-        city.map(function () {
-            if(this.selected){
-                json.city=this.innerText;
+        $(document).ready(function () {
+            let json = null;
+            json = {};
+            let info = $("#test-form p input").slice(0, 3);
+            let sex = $('#test-form p ').find('[name=sex]').first;
+            let city = $('select option');
+            info.map(function () {
+                json[this.name] = this.value
+            });
+            json.sex = sex.get(0).checked ? 'man' : 'women';
+            city.map(function () {
+                if (this.selected) {
+                    json.city = this.innerText;
+                }
+            });
+            json = JSON.stringify(json);
+            if (typeof(json) === 'string') {
+                alert(json);
             }
-        });
-        json=JSON.stringify(json);
-        if(typeof(json)==='string'){
-            alert(json);
-        }
-        else{
-            alert('json变量不是string');
-        }
+            else {
+                alert('json变量不是string');
+            }
+        })
     </script>
 </head>
 <body>
 <div>
-    <form action="#0" id="test-form" onsubmit="return false">
-        <p><label for="">name: <input type="text"name="name"></label></p>
+    <form action="#" id="test-form" onsubmit="return false">
+        <p><label for="">name: <input type="text" name="name"></label></p>
         <p><label for="">email: <input type="text" name="email"></label></p>
         <p><label for="">password: <input type="password" name="password"></label></p>
-        <p>sex: <label for=""><input type="radio"name="sex" value="m" checked>man</label>
-            <label for=""><input type="radio"name="sex"value="w">women</label></p>
-        <p><label for="">city: <select name="city" >
+        <p>sex: <label for=""><input type="radio" name="sex" value="m" checked>man</label>
+            <label for=""><input type="radio" name="sex" value="w">women</label></p>
+        <p><label for="">city: <select name="city">
             <option value="bj">北京</option>
             <option value="sh">上海</option>
             <option value="cd">成都</option>
         </select></label></p>
-        <p><button type="submit">submit</button></p>
+        <p>
+            <button type="submit">submit</button>
+        </p>
     </form>
 </div>
 </body>

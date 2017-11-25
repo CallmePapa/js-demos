@@ -7,7 +7,7 @@ window.onload = function () {
         "data": [{"src": "one.jpg"}, {"src": "one.jpg"}, {"src": "one.jpg"}]
     };
     window.onscroll = function () {
-        if (checkScrollSlide) {
+        if (checkScrollSlide()) {
             console.log(111111);
             //将数据库渲染到页面尾部
             let container = document.getElementById("container");

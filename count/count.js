@@ -26,4 +26,4 @@ function count() {
 window.onload=function () {
     let amount=document.getElementById("amount");
     amount.onclick=count;
-}
+};

@@ -12,6 +12,9 @@ class Logger {
         return new this(type);
     }
 
+    //如果试着改变一个属性的值，那么对应的 setter 将被执行。
+    // setter 经常和 getter 连用以创建一个伪属性。
+    // 不可能在具有真实值的属性上同时拥有一个 setter 器。
     //getters
     get current() {
         return "logger:${this.type}";
@@ -67,7 +70,6 @@ const cLogger = ConfigurableLogger.create('Debug');
 cLogger.log('Configurable Logger', "Info");
 console.log(cLogger.current);
 
-
 //instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
 console.log(cLogger instanceof ConfigurableLogger);//true
-console.log(cLogger instanceof Logger);//false
+console.log(cLogger instanceof Logger);//
