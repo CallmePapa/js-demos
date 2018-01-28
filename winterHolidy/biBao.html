@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bibao</title>
+    <style>
+        body{
+            background-color: aqua;
+        }
+    </style>
+    <script>
+        let fade=function (node) {
+            let level=1;
+            let step=function () {
+                let hex=level.toString(16);
+                node.style.backgroundColor='#ffffff'+hex+hex;
+                if(level<15){
+                    level+=1;
+                    setTimeout(step,100);
+                }
+            };
+            setTimeout(step,100);
+        };
+        fade(document.body);
+    </script>
+</head>
+<body>
+</body>
+</html>
