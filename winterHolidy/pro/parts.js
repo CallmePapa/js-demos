@@ -1,6 +1,8 @@
 /**
  * Created by 魏秋娟 on 2018/2/1.
  */
+
+//从一套部件中把对象组装出来。如下实现：构造一个给任何对象添加简单事件处理特征的函数。
 let eventuality=function (that) {
     let registry={};
 
