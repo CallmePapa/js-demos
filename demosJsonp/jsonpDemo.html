@@ -5,20 +5,50 @@
     <title>jsonp实现一个百度下拉框</title>
     <link rel="stylesheet" href="jsopDemo.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js" charset="utf-8"></script>
-    <script src="jsonpDemo.js" type="text/javascript"></script>
+    <!--<script src="jsonpDemo.js" type="text/javascript"></script>-->
 </head>
 <body>
 <form action="" id="formWapper">
     <div class="formFailed clearfix" id="search-form">
-        <input type="text" required="required" placeholder="Search for css3" class="search">
+        <input type="text" required="required" placeholder="Search" class="search" id="input-ifo">
         <input type="button" class="btn submit" value="Go">
     </div>
 </form>
 <div class="suggest" id="search-suggest">
     <ul id="search-result">
-        <li>搜索结果</li>
-        <li>搜索结果</li>
     </ul>
 </div>
 </body>
+<script>
+    let obj = document.querySelector("#input-ifo");
+    let body = document.querySelectorAll("body")[0];
+    let ul = document.querySelector("#search-result");
+
+    function render(data) {
+        if (ul.innerHTML !== "") {
+            ul.innerHTML = '';
+        }
+
+        for (let i = 0, len = data.s.length; i < len; i++) {
+            let li = document.createElement("li");
+            li.innerHTML = data.s[i];
+            ul.appendChild(li);
+        }
+    }
+
+
+    obj.addEventListener('keyup', function () {
+        if (document.querySelector('#request')) {
+            console.log(document.querySelector("#request"));
+            console.log(document.querySelector('#request').toString());
+        }
+        let script = document.createElement("script");
+        script.id = "request";
+        script.src = "http://unionsug.baidu.com/su?wd=" + encodeURI(obj.value.trim()) + '&p=3&cb=render';
+        body.appendChild(script);
+    });
+
+
+</script>
+
 </html>
