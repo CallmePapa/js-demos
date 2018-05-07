@@ -92,19 +92,37 @@
 #search-suggest {
     width: 388px;
     background-color: #FFFFFF;
-    border: 1px solid #999;
-    display: none;
 }
 
 .suggest ul {
+    padding: 10px;
     list-style: none;
+    transition: all 1s ease;
+    position: relative;
+    left: 20px;
+    top: -15px;
+    width: 450px;
+    background-color: #f6f6f6;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eae8e8));
+    background-image: -webkit-linear-gradient(top, #f6f6f6, #eae8e8);
+    background-image: -moz-linear-gradient(top, #f6f6f6, #eae8e8);
+    background-image: -ms-linear-gradient(top, #f6f6f6, #eae8e8);
+    background-image: -o-linear-gradient(top, #f6f6f6, #eae8e8);
+    background-image: linear-gradient(top, #f6f6f6, #eae8e8);
+    border-radius: 10px;
+
 }
 
 .suggest ul li {
     padding: 3px;
     font-size: 14px;
-    line-height: 25px;
+    line-height: 30px;
     cursor: pointer;
+    transition: all 1s ease;
+    height: 30px;
+    color: #888888;
+
+
 }
 
 .suggest ul li :hover {
