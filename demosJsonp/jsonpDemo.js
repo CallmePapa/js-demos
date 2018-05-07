@@ -6,7 +6,6 @@ $(document).ready(function () {
     //键盘事件
     $(".search").bind('keyup', function () {
         let searchText = $(".search").val();
-        console.log("获取完成");
         $.ajax({
             type: "GET",
             url: "http://api.bing.com/qsonhs.aspx?type=cb&q=" + searchText,
@@ -30,12 +29,8 @@ $(document).ready(function () {
                     position: "absolute"
                 })
             },
-            error: function (err,e) {
-                e.preventDefault();
-                alert("好像没有获取到哦!" + err.message);
-            }
+        });
 
-        })
     });
 
     $(document).bind("click", function () {
