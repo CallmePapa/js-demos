@@ -127,18 +127,18 @@ class SimplePagination {
 
         //判断上一页  下一页 是否可使用
 
-        this.switchPrevNextAble(evaNumberLi);
+        this.switchPrevNextable(evaNumberLi);
     }
 
 
-    switchPrevNextAble(evaNumberLi) {
+    switchPrevNextable(evalNumberLi) {
         let state = this.state;
         let prevBtn = this.selectorEle('.' + state.prevCName);
         let nextBtn = this.selectorEle('.' + state.nextCName);
 
         //如果当前页已经是第一页，则禁止上一页按钮的可用性
         state.pageNumber > 1
-            ? (this.hasClass(prevBtn, state.disbalePrevCName) && this.removeClass(prevBtn, state.disbalePreCName))
+            ? (this.hasClass(prevBtn, state.disbalePrevCName) && this.removeClass(prevBtn, state.disbalePrevCName))
             : (!this.hasClass(prevBtn, state.disbalePrevCName) && this.addClass(prevBtn, state.disbalePrevCName));
         //当前已经是最后一页，则禁止下一页按钮的可用性
         state.pageNumber >= state.totalPageCount
