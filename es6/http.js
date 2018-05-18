@@ -13,7 +13,7 @@ let server=http.createServer(function (request,response) {
     "use strict";
     let pathname=url.parse(request.url).pathname;
     let filepath=path.join(root,pathname);
-    fs.stat(filepath,function (err,stats) {
+    fs.start(filepath,function (err,stats) {
         if(!err&&stats.isFile()){
             console.log('200'+url);
             response.writeHead(200);

@@ -6,12 +6,14 @@ window.onload = function any_function_name() {
     while (logging.children.length > 1) {
         logging.removeChild(logging.children[logging.children.length])
     }
+
     function log(s) {
         "use strict";
         let p = document.createElement('p');
         p.innerHTML = s;
         logging.appendChild(p);
     }
+
     //0.5 秒后返回input×input的结果
     function multiply(input) {
         return new Promsie(function (resolve, reject) {
