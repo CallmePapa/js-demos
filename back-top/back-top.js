@@ -3,6 +3,7 @@
  */
 
 window.onload = goBack;
+
 function goBack() {
     let btn = document.getElementsByClassName("btn")[0];
     let isTop = true;
@@ -31,6 +32,7 @@ function goBack() {
         }, 50);
     }
 }
+
 function btnStatue() {
     let btn = document.getElementsByClassName("btn")[0];
     let scroll = document.documentElement.scrollTop || document.body.scrollTop;
