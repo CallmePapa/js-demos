@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll-follow</title>
+    <style type="text/css">
+        #container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            border: 1px solid #bbbbbb;
+        }
+
+        .left, .right {
+            flex: 1;
+            height: 100%;
+            word-wrap: break-word;
+            overflow: scroll;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="container">
+    <div class="left">
+        <div class="child"></div>
+    </div>
+    <div class="right">
+        <div class="child"></div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="scroll-element.js"></script>
+</html>
