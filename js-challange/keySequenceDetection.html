@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>key Detection</title>
+</head>
+<body>
+<p>open control see console</p>
+<script type="text/javascript">
+    const pressed=[];
+    const secretCode='hello';
+
+    window.addEventListener('keyup',(e)=>{
+        console.log(e.key);
+        pressed.push(e.key);
+        pressed.splice(-secretCode.length-1,pressed.length - secretCode.length);
+        if(pressed.join('').includes(secretCode)){
+            console.log('DING DING!');
+        }
+        console.log(pressed);
+    });
+</script>
+</body>
+</html>
