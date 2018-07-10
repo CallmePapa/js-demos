@@ -20,46 +20,64 @@
 </div>
 
 <script>
-    const addItems=document.querySelector('.add-items');
-    const itemList=document.querySelector('.plates');
-    const items=JSON.parse(localStorage.getItem('items'));
+    //添加的按钮
+    const addItems = document.querySelector('.add-items');
+    //todoList列表
+    const itemList = document.querySelector('.plates');
+    //本地缓存的所有todoItem
+    const items = JSON.parse(localStorage.getItem('items'))||[];
 
     function addItem(e) {
-        e.preventDefault();
-        const text=(this.querySelector('[name=item]')).value;
-        const item={
-            text,done:false
+        e.preventDefault();//阻止默认事件的触发，防止在提交时页面自己刷新
+        const text = (this.querySelector('[name=item]')).value;
+        const item = {
+            text,//text:text;
+            done: false
         };
 
         items.push(item);
-        populateList(items,itemList);
-        localStorage.setItem('items',JSON.stringify(items));
+        populateList(items, itemList);
+        localStorage.setItem('items', JSON.stringify(items));
+        //添加完数据之后，重置输入框
         this.reset();
     }
 
-    function toggleDone(e) {
-        if(!e.target.matches('input')) return;
-        const el=e.target;
-        const index=el.dataset.index;
-        items[index].done=!items[index].done;
-        localStorage.setItem('items',JSON.stringify(items));
-        populateList(items,itemList);
-    }
-    function populateList(plates=[],platesList) {
-        platesList.innerHTML=plates.map((plate,i)=>{
+
+    //列表显示函数
+    //设置默认值，防止传参出错的时候crash
+    //之所以用‘’空字符是因为如果用null的话，会出现在html中
+    function populateList(plates = [], platesList) {
+        platesList.innerHTML = plates.map((plate, i) => {
             return `
-                    <li>
-                      <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
-                      <label for="item${i}">${plate.text}</label>
-                    </li>
-                    `;
-        }).join('');
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `;
+        }).join('');//join()之后一定要加‘’，表示空字符，否则会加入逗号，造成错误
     }
 
-    addItems.addEventListener('submit',addItem);
-    itemList.addEventListener('click',toggleDone);
+    //切换完成状态
+    function toggleDone(e) {
+        //跳过所有的input,只处理label
+        if (!e.target.matches('input')) return;
+        const el = e.target;
+        const index = el.dataset.index;
+        items[index].done = !items[index].done;
+        localStorage.setItem('items', JSON.stringify(items));
+        populateList(items, itemList);
+    }
 
-    populateList(items,itemList);
+    addItems.addEventListener('submit', addItem);
+    itemList.addEventListener('click', toggleDone);
+
+    populateList(items, itemList);
+
+    //清除LocalStorage缓存，尤其在生产环境中
+     window.onbeforeunload=function (e) {
+         localStorage.removeItem('items');
+         e.returnValue=confirmationMessage;
+     }
 </script>
 </body>
 </html>

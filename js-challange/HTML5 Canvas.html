@@ -13,59 +13,67 @@
 </head>
 
 <body>
-    <p>拖动鼠标开始画啦~</p>
-    <canvas id="draw" width="800" height="800"></canvas>
-    <script type="text/javascript">
-        const canvas = document.querySelector('#draw');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx.strokeStyle = '#BADA55';
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.lineWidth = 100;
+<p>拖动鼠标开始画啦~</p>
+<canvas id="draw" width="800" height="800"></canvas>
+<script type="text/javascript">
+    const canvas = document.querySelector('#draw');
+    const ctx = canvas.getContext('2d');
 
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let hue = 0;
-        let direction = true;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-        function draw(e) {
-            if (!isDrawing) return; //鼠标离开即停止?
-            console.log(e);
-            ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-            ctx.beginPath();
-            //start from
-            ctx.moveTo(lastX, lastY);
-            //go to
-            ctx.lineTo(e.offsetX, e.offsetY);
-            ctx.stroke();
-            [lastX, lastY] = [e.offsetX, e.offsetY];
-            hue++;
-            if (hue >= 360) {
-                hue = 0;
-            }
-            if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-                direction = !direction;
-            }
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 100;
 
-            if (direction) {
-                ctx.lineWidth++;
-            } else {
-                ctx.lineWidth--;
-            }
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hue = 0;
+    let direction = true;
+
+    function draw(e) {
+        if (!isDrawing) return; //鼠标离开即停止
+
+        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+        //彩虹渐变颜色
+        if (hue >= 360) {
+            hue = 0;
+        }
+        hue++;
+
+        ctx.beginPath();
+        //start from
+        ctx.moveTo(lastX, lastY);
+        //go to
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        //坐标重置
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+
+
+        //控制触笔的大小
+        if (ctx.lineWidth >= 120 || ctx.lineWidth <= 10) {
+            direction = !direction;
         }
 
-        canvas.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            [lastX, lastY] = [e.offsetX, e.offsetY];
-        });
+        if (direction) {
+            ctx.lineWidth++;
+        } else {
+            ctx.lineWidth--;
+        }
+    }
 
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', () => isDrawing = false);
-        canvas.addEventListener('mouseout', () => isDrawing = false)
-    </script>
+    canvas.addEventListener('mousedown', (e) => {
+        isDrawing = true;//开始绘图
+        [lastX, lastY] = [e.offsetX, e.offsetY];//初始化坐标点
+    });
+
+    canvas.addEventListener('mousemove', draw);//鼠标移动时，调用draw方法
+    canvas.addEventListener('mouseup', () => isDrawing = false);//鼠标抬起时，将isDrawing设置为false
+    canvas.addEventListener('mouseout', () => isDrawing = false);//鼠标不在可绘制区域范围时，将isDrawing设置为false
+</script>
 </body>
 
 </html>
